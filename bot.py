@@ -5,7 +5,6 @@ from config import Config
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import logging
 from logging.handlers import RotatingFileHandler
-from telegram import ParseMode
 
 if os.path.exists("log.txt"):
     with open("log.txt", "r+") as f_d:
@@ -86,8 +85,7 @@ async def main_handler(bot, message):
             else message.chat_data.title
         )
         await message.reply_text(
-            text=f"⚠️ *Attention*\n{mention} has been banned.\n\n🏷 _He can write only with his profile but not through other channels._",
-            parse_mode=ParseMode.MARKDOWN,
+            text=f"⚠️ <b>Attention</b>\n{mention} has been banned.\n\n 🏷 <i>He can write only with his profile but not through other channels.</i>",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -189,8 +187,7 @@ async def cban_handler(bot, message):
         mention = f"@{chat_data.username}" if chat_data.username else chat_data.title
         if res:
             await message.reply_text(
-                text=f"⚠️ *Attention*\n{mention} has been banned.\n\n🏷 _He can write only with his profile but not through other channels._",
-                parse_mode=ParseMode.MARKDOWN,
+            text=f"⚠️ <b>Attention</b>\n{mention} has been banned.\n\n 🏷 <i>He can write only with his profile but not through other channels.</i>",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
