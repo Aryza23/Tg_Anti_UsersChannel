@@ -2,4 +2,3 @@ pyrogram
 dnspython
 tgcrypto
 motor
-telegram
