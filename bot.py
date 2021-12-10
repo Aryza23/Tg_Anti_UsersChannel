@@ -86,7 +86,7 @@ async def main_handler(bot, message):
             else message.chat_data.title
         )
         await message.reply_text(
-            text=f"{mention} has been banned.\n\n💡 He can write only with his profile but not through other channels.",
+            text=f"⚠️ *Attention*\n{mention} has been banned.\n\n🏷 _He can write only with his profile but not through other channels._",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -188,7 +188,7 @@ async def cban_handler(bot, message):
         mention = f"@{chat_data.username}" if chat_data.username else chat_data.title
         if res:
             await message.reply_text(
-                text=f"{mention} has been banned.\n\n💡 He can write only with his profile but not through other channels.",
+            text=f"⚠️ *Attention*\n{mention} has been banned.\n\n🏷 _He can write only with his profile but not through other channels._",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
