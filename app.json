@@ -1,0 +1,40 @@
+{
+    "name": "A Telegram Anti Users Channel",
+    "description": "A Telegram Bot for automatic kicking members who using channel for messeging.",
+    "keywords": [
+        "telegram",
+        "AntiChannel",
+        "channel",
+        "Group",
+        "manager",
+        "bot"
+    ],
+    "repository": "https://github.com/idzero23/Tg_Anti_UsersChannel",
+    "website": "https://telegram.dog/idzeroidsupport",
+    "success_url": "https://t.me/idzeroid",
+    "env": {
+        "API_ID": {
+            "description": "Get this value from my.telegram.org"
+        },
+        "API_HASH": {
+            "description": "Get this value from my.telegram.org"
+        },
+        "BOT_TOKEN": {
+            "description": "Get this from @BotFather"
+        },
+        "DATABASE_URL": {
+            "description": "MongoDB URI for Saving Chat Settings."
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ],
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
+    }
+}
