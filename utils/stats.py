@@ -15,6 +15,7 @@ from pyrogram.types import Message
 from stats_db import db
 from decorators import sudo_users_only
 
+
 @Client.on_message(command("stats"))
 @sudo_users_only
 async def botstats(_, message: Message):
