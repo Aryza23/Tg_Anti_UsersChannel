@@ -75,6 +75,6 @@ class Database:
 
 
 # Database
-db = Database(DATABASE_URL, BOT_USERNAME)
+sdb = Database(DATABASE_URL, BOT_USERNAME)
 mongo_db_lmao = MongoClient(DATABASE_URL)
 dcmdb = mongo_db_lmao.handlers
