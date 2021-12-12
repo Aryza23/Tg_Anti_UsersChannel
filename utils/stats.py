@@ -16,10 +16,7 @@ from stats_db import db
 
 
 @Client.on_message(
-    filters.private
-    & filters.command("stats")
-    & filters.user(OWNER_ID)
-    & filters.reply
+    filters.private & filters.command("stats") & filters.user(OWNER_ID) & filters.reply
 )
 async def botstats(_, message: Message):
     total, used, free = shutil.disk_usage(".")
