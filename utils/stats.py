@@ -15,7 +15,6 @@ from pyrogram.types import Message
 from stats_db import db
 
 
-
 @Client.on_message(
     filters.private
     & filters.command("statistic")
@@ -36,4 +35,3 @@ async def botstats(_, message: Message):
         parse_mode="Markdown",
         quote=True,
     )
-
