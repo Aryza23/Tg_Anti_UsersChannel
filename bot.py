@@ -5,6 +5,28 @@ from config import Config
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import logging
 from logging.handlers import RotatingFileHandler
+from decorators import sudo_users_only
+import shutil
+import psutil
+from stats_db import sdb
+
+# Stats Of Your Bot
+@Client.on_message(command("stats"))
+@sudo_users_only
+async def botstats(_, message: Message):
+    total, used, free = shutil.disk_usage(".")
+    total = humanbytes(total)
+    used = humanbytes(used)
+    free = humanbytes(free)
+    cpu_usage = psutil.cpu_percent()
+    ram_usage = psutil.virtual_memory().percent
+    disk_usage = psutil.disk_usage("/").percent
+    total_users = await sdb.total_users_count()
+    await message.reply_text(
+        text=f"**📊 stats of @{BOT_USERNAME}** \n\n**🤖 bot version:** `IDZ V0.1aR` \n\n**🙎🏼 total users:** \n » **on bot pm:** `{total_users}` \n\n**💾 disk usage:** \n » **disk space:** `{total}` \n » **used:** `{used}({disk_usage}%)` \n » **free:** `{free}` \n\n**🎛 hardware usage:** \n » **CPU usage:** `{cpu_usage}%` \n » **RAM usage:** `{ram_usage}%`",
+        parse_mode="Markdown",
+        quote=True,
+    )
 
 if os.path.exists("log.txt"):
     with open("log.txt", "r+") as f_d:
