@@ -11,7 +11,7 @@ import psutil
 from stats_db import sdb
 
 # Stats Of Your Bot
-@Client.on_message(command("stats"))
+@Aryza.on_message(command("stats"))
 @sudo_users_only
 async def botstats(_, message: Message):
     total, used, free = shutil.disk_usage(".")
