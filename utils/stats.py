@@ -17,7 +17,7 @@ from stats_db import db
 
 @Client.on_message(
     filters.private
-    & filters.command("statistic")
+    & filters.command("stats")
     & filters.user(OWNER_ID)
     & filters.reply
 )
