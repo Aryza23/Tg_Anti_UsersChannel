@@ -28,6 +28,7 @@ async def botstats(_, message: Message):
         quote=True,
     )
 
+
 if os.path.exists("log.txt"):
     with open("log.txt", "r+") as f_d:
         f_d.truncate(0)
