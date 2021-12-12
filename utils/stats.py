@@ -13,11 +13,10 @@ from config import (
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from stats_db import db
+from decorators import sudo_users_only
 
-
-@Client.on_message(
-    filters.private & filters.command("stats") & filters.user(OWNER_ID) & filters.reply
-)
+@Client.on_message(command("stats"))
+@sudo_users_only
 async def botstats(_, message: Message):
     total, used, free = shutil.disk_usage(".")
     total = humanbytes(total)
