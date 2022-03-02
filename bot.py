@@ -56,13 +56,10 @@ async def get_channel_id_from_input(bot, message):
 
 
 custom_message_filter = filters.create(
-    lambda _, __, message: not message.forward_from_chat
-    and not message.from_user
+    lambda _, __, message: not message.forward_from_chat and not message.from_user
 )
 
-custom_chat_filter = filters.create(
-    lambda _, __, message: bool(message.sender_chat)
-)
+custom_chat_filter = filters.create(lambda _, __, message: bool(message.sender_chat))
 
 
 @Aryza.on_message(custom_message_filter & filters.group & custom_chat_filter)
@@ -105,12 +102,8 @@ check /help for more.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        "Update", url="https://t.me/idzeroid"
-                    ),
-                    InlineKeyboardButton(
-                        "Support", url="https://t.me/idzeroidsupport"
-                    ),
+                    InlineKeyboardButton("Update", url="https://t.me/idzeroid"),
+                    InlineKeyboardButton("Support", url="https://t.me/idzeroidsupport"),
                 ]
             ]
         ),
@@ -131,12 +124,8 @@ for more help Go @idzeroidsupport and ask""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        "Update", url="https://t.me/idzeroid"
-                    ),
-                    InlineKeyboardButton(
-                        "Support", url="https://t.me/idzeroidsupport"
-                    ),
+                    InlineKeyboardButton("Update", url="https://t.me/idzeroid"),
+                    InlineKeyboardButton("Support", url="https://t.me/idzeroidsupport"),
                 ]
             ]
         ),
