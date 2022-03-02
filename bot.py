@@ -36,10 +36,7 @@ async def whitelist_check(chat_id, channel_id=0):
     if not (await db.is_chat_exist(chat_id)):
         await db.add_chat_list(chat_id)
     _chat_list = await db.get_chat_list(chat_id)
-    if int(channel_id) in _chat_list:
-        return True
-    else:
-        return False
+    return int(channel_id) in _chat_list
 
 
 async def get_channel_id_from_input(bot, message):
@@ -59,12 +56,12 @@ async def get_channel_id_from_input(bot, message):
 
 
 custom_message_filter = filters.create(
-    lambda _, __, message: False
-    if message.forward_from_chat or message.from_user
-    else True
+    lambda _, __, message: not message.forward_from_chat
+    and not message.from_user
 )
+
 custom_chat_filter = filters.create(
-    lambda _, __, message: True if message.sender_chat else False
+    lambda _, __, message: bool(message.sender_chat)
 )
 
 
@@ -108,9 +105,11 @@ check /help for more.""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("Update", url=f"https://t.me/idzeroid"),
                     InlineKeyboardButton(
-                        "Support", url=f"https://t.me/idzeroidsupport"
+                        "Update", url="https://t.me/idzeroid"
+                    ),
+                    InlineKeyboardButton(
+                        "Support", url="https://t.me/idzeroidsupport"
                     ),
                 ]
             ]
@@ -132,9 +131,11 @@ for more help Go @idzeroidsupport and ask""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("Update", url=f"https://t.me/idzeroid"),
                     InlineKeyboardButton(
-                        "Support", url=f"https://t.me/idzeroidsupport"
+                        "Update", url="https://t.me/idzeroid"
+                    ),
+                    InlineKeyboardButton(
+                        "Support", url="https://t.me/idzeroidsupport"
                     ),
                 ]
             ]
@@ -150,9 +151,7 @@ async def cb_handler(bot, query):
         an_id = cb_data.split("_")[-1]
         chat_id = cb_data.split("_")[-2]
         user = await bot.get_chat_member(chat_id, query.from_user.id)
-        if user.status == "creator" or user.status == "administrator":
-            pass
-        else:
+        if user.status not in ["creator", "administrator"]:
             return await query.answer("This Message is Not For You!", show_alert=True)
         await bot.resolve_peer(an_id)
         res = await query.message.chat.unban_member(an_id)
@@ -169,9 +168,7 @@ async def cb_handler(bot, query):
 async def cban_handler(bot, message):
     chat_id = message.chat.id
     user = await bot.get_chat_member(message.chat.id, message.from_user.id)
-    if user.status == "creator" or user.status == "administrator":
-        pass
-    else:
+    if user.status not in ["creator", "administrator"]:
         return
     try:
         a_id = await get_channel_id_from_input(bot, message)
@@ -208,9 +205,7 @@ async def cban_handler(bot, message):
 async def uncban_handler(bot, message):
     chat_id = message.chat.id
     user = await bot.get_chat_member(message.chat.id, message.from_user.id)
-    if user.status == "creator" or user.status == "administrator":
-        pass
-    else:
+    if user.status not in ["creator", "administrator"]:
         return
     try:
         a_id = await get_channel_id_from_input(bot, message)
@@ -237,9 +232,7 @@ async def uncban_handler(bot, message):
 async def add_whitelist_handler(bot, message):
     chat_id = message.chat.id
     user = await bot.get_chat_member(chat_id, message.from_user.id)
-    if user.status == "creator" or user.status == "administrator":
-        pass
-    else:
+    if user.status not in ["creator", "administrator"]:
         return
     try:
         a_id = await get_channel_id_from_input(bot, message)
@@ -260,9 +253,7 @@ async def add_whitelist_handler(bot, message):
 async def del_whitelist_handler(bot, message):
     chat_id = message.chat.id
     user = await bot.get_chat_member(chat_id, message.from_user.id)
-    if user.status == "creator" or user.status == "administrator":
-        pass
-    else:
+    if user.status not in ["creator", "administrator"]:
         return
     try:
         a_id = await get_channel_id_from_input(bot, message)
@@ -283,9 +274,7 @@ async def del_whitelist_handler(bot, message):
 async def del_whitelist_handler(bot, message):
     chat_id = message.chat.id
     user = await bot.get_chat_member(chat_id, message.from_user.id)
-    if user.status == "creator" or user.status == "administrator":
-        pass
-    else:
+    if user.status not in ["creator", "administrator"]:
         return
     show_wl = await db.get_chat_list(chat_id)
     if show_wl:

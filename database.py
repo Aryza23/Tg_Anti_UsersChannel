@@ -26,14 +26,11 @@ class Database:
 
     async def is_chat_exist(self, id):
         user = await self.col.find_one({"id": int(id)})
-        return user if user else False
+        return user or False
 
     async def get_chat_list(self, chat_id):
         get_chat = await self.is_chat_exist(chat_id)
-        if get_chat:
-            return get_chat.get("chats", [])
-        else:
-            return False
+        return get_chat.get("chats", []) if get_chat else False
 
     async def del_chat_list(self, chat_id, ch_id=None):
         get_chat = await self.is_chat_exist(chat_id)
