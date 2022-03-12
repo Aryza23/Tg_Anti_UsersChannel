@@ -19,7 +19,8 @@ pip3 install -r requirements.txt
 # Setup Configurations in config.py file!
 python3 bot.py
 ```
-
+## Info contact
+- [Aryza](https://t.me/idzxartez)
 ### Credits
-- [Aryza](https://github.com/idzero23)
+- [Aryza](https://github.com/Aryza23)
 - [Pyrogram](https://github.com/pyrogram/pyrogram)
